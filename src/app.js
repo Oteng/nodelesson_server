@@ -18,6 +18,34 @@ let stm = db.prepare('CREATE TABLE IF NOT EXISTS student ( ' +
     'email varchar(255)' +
     ' );');
 stm.run()
+stm = db.prepare('CREATE TABLE IF NOT EXISTS class ( ' +
+    'id INTEGER PRIMARY KEY, ' +
+    'name varchar(255),' +
+    'classmaster varchar(255),' +
+    'class_id varchar(255)' +
+    ' );');
+stm.run()
+stm = db.prepare('CREATE TABLE IF NOT EXISTS course ( ' +
+    'id INTEGER PRIMARY KEY, ' +
+    'name varchar(255),' +
+    'course_teacher varchar(255),' +
+    'course_id varchar(255)' +
+    ' );');
+stm.run()
+stm = db.prepare('CREATE TABLE IF NOT EXISTS class_course ( ' +
+    'id INTEGER PRIMARY KEY, ' +
+    'tbl_class_id varchar(255),' +
+    'tbl_course_id varchar(255),' +
+    'active boolean default true' +
+    ' );');
+stm.run()
+stm = db.prepare('CREATE TABLE IF NOT EXISTS student_class ( ' +
+    'id INTEGER PRIMARY KEY, ' +
+    'tbl_student_id varchar(255),' +
+    'tbl_class_id varchar(255),' +
+    'active boolean default true' +
+    ' );');
+stm.run()
 
 const app = express()
 const port = 3000
