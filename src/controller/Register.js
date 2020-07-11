@@ -8,8 +8,7 @@ export default class Register {
 
     register(req, res) {
         if (Student.validateAndCreated(req.body)) {
-            Student.saveInDB();
-            return res.send('Student Created')
+            return res.send(Student.saveInDB());
         } else {
             return res.send('All fields are required')
         }
