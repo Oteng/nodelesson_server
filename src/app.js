@@ -81,7 +81,7 @@ app.get('/login', function (req, res) {
 app.get('/register', function (req, res) {
     res.send('Yet to create register page');
   });
-  
+
 app.get('/reset', function (req, res) {
     res.send('Yet to implement password reset');
   });
@@ -106,5 +106,3 @@ for (let controller of controllers) {
 // app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
-
-console.log(__dirname);
