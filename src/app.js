@@ -18,10 +18,52 @@ let stm = db.prepare('CREATE TABLE IF NOT EXISTS student ( ' +
     'email varchar(255)' +
     ' );');
 stm.run()
+stm = db.prepare('CREATE TABLE IF NOT EXISTS class ( ' +
+    'id INTEGER PRIMARY KEY, ' +
+    'name varchar(255),' +
+    'classmaster varchar(255),' +
+    'class_id varchar(255)' +
+    ' );');
+stm.run()
+stm = db.prepare('CREATE TABLE IF NOT EXISTS course ( ' +
+    'id INTEGER PRIMARY KEY, ' +
+    'name varchar(255),' +
+    'course_teacher varchar(255),' +
+    'course_id varchar(255)' +
+    ' );');
+stm.run()
+stm = db.prepare('CREATE TABLE IF NOT EXISTS class_course ( ' +
+    'id INTEGER PRIMARY KEY, ' +
+    'tbl_class_id varchar(255),' +
+    'tbl_course_id varchar(255),' +
+    'active boolean default true' +
+    ' );');
+stm.run()
+stm = db.prepare('CREATE TABLE IF NOT EXISTS student_class ( ' +
+    'id INTEGER PRIMARY KEY, ' +
+    'tbl_student_id varchar(255),' +
+    'tbl_class_id varchar(255),' +
+    'active boolean default true' +
+    ' );');
+stm.run()
+
+/*
+    username
+    password
+    type: [student, teacher, admin]
+    islogin: default false
+    token
+    id
+    created_at: default now()
+    updated_at: default now()
+ */
 
 const app = express()
 const port = 3000
-app.use(express.json())
+// app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.set('views', './src/views')
+app.set('view engine', 'ejs')
 
 let controllers = fs.readdirSync('./src/controller');
 
