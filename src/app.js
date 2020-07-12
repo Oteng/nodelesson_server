@@ -51,7 +51,18 @@ stm = db.prepare('CREATE TABLE IF NOT EXISTS student_class ( ' +
     'active boolean default true' +
     ' );');
 stm.run()
-
+stm = db.prepare('CREATE TABLE IF NOT EXISTS user(' +
+    'id INTEGER PRIMARY KEY, ' +
+    'username VARCHAR(255),' +
+    'password VARCHAR(255),' +
+    'type enum(\'student\',\'teacher\',\'admin\'),' +
+    'islogin boolean default false,' + 
+    'token VARCHAR(255),' +
+    'created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,' +
+    'created_at DATETIME DEFAULT CURRENT_TIMESTAMP' +
+    ' );' 
+); 
+stm.run()
 /*
     username
     password
