@@ -1,7 +1,12 @@
-import express from 'express'
-import fs from 'fs'
+import express from 'express';
+import fs from 'fs';
 import Database from 'better-sqlite3';
+import path, { dirname } from 'path';
+import expressLayouts from 'express-ejs-layouts';
 const db = new Database('database.db', {verbose: console.log});
+// const expressLayouts = require('express-ejs-layouts');
+// const dirPath = path.join(__dirname, './assets');
+var __dirname = path.resolve();
 
 //create tables
 let stm = db.prepare('CREATE TABLE IF NOT EXISTS student ( ' +
@@ -58,12 +63,28 @@ stm.run()
     updated_at: default now()
  */
 
-const app = express()
-const port = 3000
+const app = express();
+const port = 3000;
 // app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.set('views', './src/views')
-app.set('view engine', 'ejs')
+
+app.use(express.urlencoded({ extended: true }));
+
+app.use(express.static(path.join(__dirname,'src/assets')));
+app.use(expressLayouts);
+app.set('views', './src/views');
+app.set('view engine', 'ejs');
+
+app.get('/login', function (req, res) {
+    res.render('login');
+  });
+
+app.get('/register', function (req, res) {
+    res.send('Yet to create register page');
+  });
+  
+app.get('/reset', function (req, res) {
+    res.send('Yet to implement password reset');
+  });
 
 let controllers = fs.readdirSync('./src/controller');
 
@@ -85,3 +106,5 @@ for (let controller of controllers) {
 // app.get('/', (req, res) => res.send('Hello World!'))
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))
+
+console.log(__dirname);
