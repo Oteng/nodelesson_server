@@ -4,7 +4,7 @@ const db = new Database("database.db", { verbose: console.log });
 export default {
   username: "",
   password: "",
-  type: [student,teacher,admin],
+  type: "",
   isLogin: false,
   token: null,
   id: null,
@@ -21,7 +21,7 @@ export default {
       "created_at",
       "updated_at",
     ]) {
-      if (obj[key] == null) return false;
+      if (obj[key] === null) return false;
       else this[key] = obj[key];
     }
     return true;
@@ -29,7 +29,7 @@ export default {
   saveInDB() {
     let user = db.prepare(
       "INSERT INTO USER (username, password," +
-        "type isLogin id created_at updated_at"
+        "type, isLogin, created_at, updated_at"
         ") values(?,?,?,?,?,?,?,?,?)",
     );
     let result = user.run(
