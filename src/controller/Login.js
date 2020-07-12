@@ -6,14 +6,13 @@ export default class Login {
 
     doLogin(req, res) {
         if (req.method.toLowerCase() === 'post') {
-            console.log(req.body)
-            res.json(req.body)
+           //proper login
         } else {
-            res.send("Login Page")
+            res.render('login', {});
         }
     }
 
-    logOut(req, res){
+    logOut(req, res) {
         res.send('Not Implemented')
     }
 }

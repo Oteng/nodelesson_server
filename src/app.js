@@ -47,9 +47,23 @@ stm = db.prepare('CREATE TABLE IF NOT EXISTS student_class ( ' +
     ' );');
 stm.run()
 
+/*
+    username
+    password
+    type: [student, teacher, admin]
+    islogin: default false
+    token
+    id
+    created_at: default now()
+    updated_at: default now()
+ */
+
 const app = express()
 const port = 3000
-app.use(express.json())
+// app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.set('views', './src/views')
+app.set('view engine', 'ejs')
 
 let controllers = fs.readdirSync('./src/controller');
 
