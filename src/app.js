@@ -1,8 +1,9 @@
 import express from 'express';
 import fs from 'fs';
 import Database from 'better-sqlite3';
-import path, { dirname } from 'path';
+import path from 'path';
 import expressLayouts from 'express-ejs-layouts';
+
 const db = new Database('database.db', {verbose: console.log});
 // const expressLayouts = require('express-ejs-layouts');
 // const dirPath = path.join(__dirname, './assets');
@@ -55,13 +56,13 @@ stm = db.prepare('CREATE TABLE IF NOT EXISTS user(' +
     'id INTEGER PRIMARY KEY, ' +
     'username VARCHAR(255),' +
     'password VARCHAR(255),' +
-    'type enum(\'student\',\'teacher\',\'admin\'),' +
-    'islogin boolean default false,' + 
+    "type varchar(50)," +
+    'islogin boolean default false,' +
     'token VARCHAR(255),' +
     'created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ,' +
-    'created_at DATETIME DEFAULT CURRENT_TIMESTAMP' +
-    ' );' 
-); 
+    'updated_at DATETIME DEFAULT CURRENT_TIMESTAMP' +
+    ' );'
+);
 stm.run()
 /*
     username
@@ -78,24 +79,16 @@ const app = express();
 const port = 3000;
 // app.use(express.json())
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
-app.use(express.static(path.join(__dirname,'src/assets')));
+app.use(express.static(path.join(__dirname, 'src/assets')));
 app.use(expressLayouts);
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
-app.get('/login', function (req, res) {
-    res.render('login');
-  });
-
-app.get('/register', function (req, res) {
-    res.send('Yet to create register page');
-  });
-
-app.get('/reset', function (req, res) {
-    res.send('Yet to implement password reset');
-  });
+app.get('/', function (req, res) {
+    res.redirect('/login/dologin')
+});
 
 let controllers = fs.readdirSync('./src/controller');
 
