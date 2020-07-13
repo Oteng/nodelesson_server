@@ -1,6 +1,19 @@
 import Database from "better-sqlite3";
 const db = new Database("database.db", { verbose: console.log });
 
+function student(lname, fname, oname, dob, stud_id,class, contact, parent_name, parent_contact, email) {
+    this.lname = lname;
+    this.fname = fname;
+    this.oname = oname;
+    this.dob = dob;
+    this.stud_id = stud_id;
+    this.class = class;
+    this.contact = contact;
+    this.parent_name = parent_name;
+    this.parent_contact = parent_contact;
+    this.email = email;
+}
+
 export default {
   lname: "",
   fname: "",
@@ -26,6 +39,10 @@ export default {
       if (obj[key] == null) return false;
       else this[key] = obj[key];
     }
+<<<<<<< HEAD
+
+}
+=======
     return true;
   },
   saveInDB() {
@@ -48,3 +65,4 @@ export default {
     return result;
   },
 };
+>>>>>>> 6fa081fb07571162e81fe9a89c2b76aded766f12
